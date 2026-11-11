@@ -575,7 +575,7 @@ function App() {
             ← Басты бет
           </button>
 
-          <h1>🏇 Қыз қуу</h1>
+          <h1>🏇 Ат жарысы</h1>
 
           {questions.length === 0 ? (
             <div className="result">
