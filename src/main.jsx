@@ -108,6 +108,17 @@ const initialStories = [
 function App() {
   const [page, setPage] = useState("home");
 
+  const APP_VERSION = "2.0";
+
+  const savedVersion = localStorage.getItem("qazaqAppVersion");
+
+  if (savedVersion !== APP_VERSION) {
+    localStorage.removeItem("qazaqQuestions");
+    localStorage.removeItem("qazaqStories");
+
+    localStorage.setItem("qazaqAppVersion", APP_VERSION);
+  }
+
   const [questions, setQuestions] = useState(() => {
     try {
       const saved = localStorage.getItem("qazaqQuestions");
@@ -376,7 +387,7 @@ function App() {
           <section className="cards">
             <article onClick={startGame}>
               <b>🏇 Ат Жарыс</b>
-              <small>Екі гонщиктің білім жарысы</small>
+              <small>Екі шабандоздың білім жарысы</small>
             </article>
 
             <article onClick={openStoryList}>
@@ -639,8 +650,8 @@ function App() {
             <div className="result">
               <h2>🏁 Жарыс аяқталды!</h2>
               <h2>🏆 {winner}</h2>
-              <p>Бірінші гонщик: {scores[0]} дұрыс жауап</p>
-              <p>Екінші гонщик: {scores[1]} дұрыс жауап</p>
+              <p>Бірінші шабандоз: {scores[0]} дұрыс жауап</p>
+              <p>Екінші шабандоз: {scores[1]} дұрыс жауап</p>
               <button className="primary" onClick={startGame}>
                 Қайта ойнау
               </button>
@@ -687,20 +698,20 @@ function App() {
                     disabled={answered[0]}
                     onClick={() => setActiveRacer(0)}
                   >
-                    🏇 Бірінші гонщик {answered[0] ? "✓" : ""}
+                    🏇 Бірінші шабандоз {answered[0] ? "✓" : ""}
                   </button>
                   <button
                     className={activeRacer === 1 ? "selected" : ""}
                     disabled={answered[1]}
                     onClick={() => setActiveRacer(1)}
                   >
-                    🏇 Екінші гонщик {answered[1] ? "✓" : ""}
+                    🏇 Екінші шабандоз {answered[1] ? "✓" : ""}
                   </button>
                 </div>
 
                 <p className="turn-label">
                   Қазір жауап береді:{" "}
-                  {activeRacer === 0 ? "Бірінші гонщик" : "Екінші гонщик"}
+                  {activeRacer === 0 ? "Бірінші шабандоз" : "Екінші шабандоз"}
                 </p>
 
                 <div className="answers">
@@ -720,9 +731,9 @@ function App() {
                 )}
 
                 <p>
-                  Бірінші гонщик: {answered[0] ? "Дайын ✓" : "Күтуде"}
+                  Бірінші шабандоз: {answered[0] ? "Дайын ✓" : "Күтуде"}
                   {" | "}
-                  Екінші гонщик: {answered[1] ? "Дайын ✓" : "Күтуде"}
+                  Екінші шабандоз: {answered[1] ? "Дайын ✓" : "Күтуде"}
                 </p>
 
                 <button
